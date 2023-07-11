@@ -1,10 +1,10 @@
-# WeBlog
+# AiBlog
 
 ## 简介
 
 一款由 Spring Boot + Vue 3.2 开发的前后端分离博客。
 
-![Weblog 后台仪表盘](https://img.icarus.com/icarus/168887767469647 "Weblog 后台仪表盘")
+![AiBlog 后台仪表盘](https://img.icarus.com/icarus/168887767469647 "AiBlog 后台仪表盘")
 
 - 后端采用 Spring Boot 、Mybatis Plus 、MySQL 、Spring Sericuty、JWT、Minio、Guava 等；
 - 后台管理采用 Vue 3.2 + Element Plus 纯手写的管理后台，未采用任何 Admin 框架；
@@ -14,27 +14,25 @@
 
 ## 相关地址
 
-- GitHub 地址：[https://github.com/weiwosuoai/WeBlog](https://github.com/weiwosuoai/WeBlog)
-- Gitee 地址：[https://gitee.com/AllenJiang/WeBlog](https://gitee.com/AllenJiang/WeBlog)
-- 演示地址：http://118.31.41.16:8081/
+- GitHub 地址：[https://github.com/oneredka/AiBlog](https://github.com/oneredka/AiBlog)
+- 演示地址：/
   - 游客账号：test
   - 游客密码：test
-   > PS: 演示环境的服务器配置很低，资源紧张，导致响应较慢，你可部署到本地，或者换个时间段访问~
     
 
 ## 演示截图
 
 ### 登录页
 
-![Weblog 登录界面](https://img.icarus.com/icarus/168887753888612 "Weblog 登录界面")
+![AiBlog 登录界面](https://img.icarus.com/icarus/168887753888612 "AiBlog 登录界面")
 
 ### 仪表盘
 
-![Weblog 后台仪表盘](https://img.icarus.com/icarus/168887767469647 "Weblog 后台仪表盘")
+![AiBlog 后台仪表盘](https://img.icarus.com/icarus/168887767469647 "AiBlog 后台仪表盘")
 
 ### 文章管理
 
-![Weblog 文章管理](https://img.icarus.com/icarus/168888895520650 "Weblog 文章管理")
+![AiBlog 文章管理](https://img.icarus.com/icarus/168888895520650 "AiBlog 文章管理")
 
 ### 写博客
 
@@ -80,8 +78,8 @@
 
 | 项目名            | 说明     |
 | ----------------- | -------- |
-| aiblog-springboot | 后端项目 |
-| aiblog-vue3       | 前端项目 |
+| aiblog-backend | 后端项目 |
+| aiblog-frontend       | 前端项目 |
 
 ### 后端项目模块介绍
 
