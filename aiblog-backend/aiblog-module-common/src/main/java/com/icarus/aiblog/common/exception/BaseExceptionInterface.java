@@ -1,0 +1,15 @@
+package com.icarus.aiblog.common.exception;
+
+/**
+ * @author: 犬小哈
+ * @url: www.icarus.com
+ * @date: 2023-04-18 8:06
+ * @description: TODO
+ **/
+public interface BaseExceptionInterface {
+
+    String getErrorCode();
+
+    String getErrorMessage();
+
+}
