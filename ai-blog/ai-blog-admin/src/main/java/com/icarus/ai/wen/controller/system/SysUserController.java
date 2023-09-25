@@ -5,8 +5,10 @@ import com.icarus.ai.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ import java.util.List;
  * @author: louis
  * @date: 2023/7/28
  **/
-@Controller
+@RestController
 @RequestMapping("/system/user")
 public class SysUserController {
 
@@ -26,9 +28,15 @@ public class SysUserController {
     private ISysUserService userService;
 
     @GetMapping("/list")
-    @ResponseBody
     public List<SysUser> list() {
         List<SysUser> list = userService.selectSysUserList();
         return list;
+    }
+
+    @PostMapping("/login")
+    public Boolean login() throws InterruptedException {
+        this.wait(5000);
+        System.out.println("login");
+        return true;
     }
 }
