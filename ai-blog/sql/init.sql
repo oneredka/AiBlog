@@ -1,35 +1,94 @@
-CREATE DATABASE IF NOT EXISTS icarus
-    DEFAULT CHARACTER SET utf8mb4
-    DEFAULT COLLATE utf8mb4_general_ci;
-
-/*用户表*/
-drop table if exists sys_user;
-CREATE TABLE `sys_user`
+-- user  text: 123456 pwd: $2a$10$RIxwQFr/8qEsbVZzyPE7duTzcB00/HB5HDwM4X9pJOTeOd.mV5WyO
+DROP TABLE  users;
+CREATE TABLE users
 (
-    id          bigint(20)  not null auto_increment comment '用户ID',
-    login_name  varchar(30) not null comment '用户账号',
-    password    varchar(100) default '' comment '密码',
-    nick_name   varchar(30) not null comment '用户昵称',
-    email       varchar(50)  default '' comment '用户邮箱',
-    phonenumber varchar(11)  default '' comment '手机号码',
-    sex         char(1)      default '0' comment '用户性别（0男 1女 2未知）',
-    avatar      varchar(100) default '' comment '头像地址',
-    status      char(1)      default '0' comment '帐号状态（0正常 1停用）',
-    del_flag    char(1)      default '0' comment '删除标志（0代表存在 2代表删除）',
-    create_by   varchar(64)  default '' comment '创建者',
-    create_time datetime     default CURRENT_TIMESTAMP comment '创建时间',
-    update_by   varchar(64)  default '' comment '更新者',
-    update_time datetime     default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
-    PRIMARY KEY (`id`)
+    user_id      INT PRIMARY KEY AUTO_INCREMENT,
+    login_name   VARCHAR(50)         NOT NULL,
+    password     VARCHAR(100)         NOT NULL,
+    nick_name    VARCHAR(30)         NOT NULL COMMENT '用户昵称',
+    avatar       VARCHAR(500) DEFAULT '' COMMENT '头像地址',
+    email        VARCHAR(255) UNIQUE NOT NULL,
+    created_time TIMESTAMP    DEFAULT CURRENT_TIMESTAMP,
+    updated_time TIMESTAMP    DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    status       INT          DEFAULT 0
 ) ENGINE = INNODB
   AUTO_INCREMENT = 1
   DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_general_ci COMMENT = '用户表';
+  COLLATE = utf8mb4_general_ci COMMENT = '用户信息表';
 
 
-INSERT INTO aiblog.sys_user (login_name, password, nick_name, email, phonenumber, sex, avatar, status, del_flag, create_by, create_time, update_by, update_time)
-VALUES ('louis.yi', '123456', 'icarus', 'gg.hilock@gmail.com', DEFAULT, '0', DEFAULT, DEFAULT, DEFAULT, 'system', null, 'system', null);
-INSERT INTO aiblog.sys_user (id, login_name, password, nick_name, email, phonenumber, sex, avatar, status, del_flag,create_by, create_time, update_by, update_time)
-VALUES (null, 'admin', '123456', 'admin', 'gg.hilock@gmail.com', null, '0', null, null, null, 'system', null, 'system',null);
-INSERT INTO aiblog.sys_user (id, login_name, password, nick_name, email, phonenumber, sex, avatar, status, del_flag, create_by, create_time, update_by, update_time)
-VALUES (null, 'test', '123456', 'test', 'gg.xxxk@gmail.com', null, '0', null, null, null, 'system', null, 'system',null);
+DROP TABLE IF EXISTS posts;
+CREATE TABLE posts
+(
+    post_id      INT PRIMARY KEY AUTO_INCREMENT,
+    author_id    INT      NOT NULL,
+    title        TEXT     NOT NULL,
+    content      LONGTEXT NOT NULL,
+    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    status       INT       DEFAULT 0,
+    FOREIGN KEY (author_id) REFERENCES users (user_id) ON DELETE CASCADE
+) ENGINE = INNODB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '文章信息表';
+
+DROP TABLE IF EXISTS categories;
+CREATE TABLE categories
+(
+    category_id   INT PRIMARY KEY AUTO_INCREMENT,
+    category_name VARCHAR(50) NOT NULL,
+    created_time  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_time  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    status        INT       DEFAULT 0
+) ENGINE = INNODB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '文章类别表';
+
+DROP TABLE IF EXISTS post_categories;
+CREATE TABLE post_categories
+(
+    post_id      INT NOT NULL,
+    category_id  INT NOT NULL,
+    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    status       INT       DEFAULT 0,
+    PRIMARY KEY (post_id, category_id),
+    FOREIGN KEY (post_id) REFERENCES posts (post_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES categories (category_id) ON DELETE CASCADE
+) ENGINE = INNODB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '文章类别关联表';
+
+DROP TABLE IF EXISTS tags;
+CREATE TABLE tags
+(
+    tag_id       INT PRIMARY KEY AUTO_INCREMENT,
+    tag_name     VARCHAR(50) NOT NULL,
+    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    status       INT       DEFAULT 0
+) ENGINE = INNODB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '文章标签表';
+
+DROP TABLE IF EXISTS post_tags;
+CREATE TABLE post_tags
+(
+    post_id      INT NOT NULL,
+    tag_id       INT NOT NULL,
+    created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    status       INT       DEFAULT 0,
+    PRIMARY KEY (post_id, tag_id),
+    FOREIGN KEY (post_id) REFERENCES posts (post_id) ON DELETE CASCADE,
+    FOREIGN KEY (tag_id) REFERENCES tags (tag_id) ON DELETE CASCADE
+) ENGINE = INNODB
+  AUTO_INCREMENT = 1
+  DEFAULT CHARSET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '文章标签关联表';
+
+
