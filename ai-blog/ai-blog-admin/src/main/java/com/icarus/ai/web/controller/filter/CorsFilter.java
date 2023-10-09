@@ -1,4 +1,4 @@
-package com.icarus.ai.wen.controller.filter;
+package com.icarus.ai.web.controller.filter;
 
 import org.springframework.stereotype.Component;
 

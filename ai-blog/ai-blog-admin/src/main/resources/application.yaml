@@ -63,10 +63,10 @@ mybatis:
   mapper-locations: classpath:mapper/*/*Mapper.xml
 
 # 日志配置
-logging:
-  level:
-    root: INFO
-    com:
-      bolingcavalry:
-        druidonesource:
-          mapper: debug
+
+
+icarus:
+  jwt:
+    header: Authorization
+    expire: 604800 # 7days，in seconds
+    secret: abcdefghaxxxxxxxzzzzzz

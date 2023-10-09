@@ -1,6 +1,6 @@
 package com.icarus.ai.mapper;
 
-import com.icarus.ai.domain.sysuser.SysUser;
+import com.icarus.ai.domain.SysUser;
 
 import java.util.List;
 

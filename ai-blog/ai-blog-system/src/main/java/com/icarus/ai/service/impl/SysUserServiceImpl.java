@@ -1,6 +1,6 @@
 package com.icarus.ai.service.impl;
 
-import com.icarus.ai.domain.sysuser.SysUser;
+import com.icarus.ai.domain.SysUser;
 import com.icarus.ai.mapper.SysUserMapper;
 import com.icarus.ai.service.ISysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
